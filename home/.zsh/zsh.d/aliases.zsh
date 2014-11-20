@@ -1,21 +1,8 @@
 # global {{{1
-# just give a filename with those suffixes and zsh will open it with mplayer
-alias -s {mkv,avi,mpg,mpeg,wmv,rmvb}='mplayer' 
-if type feh > /dev/null; then
-    alias -s {gif,jpg,jpeg,png}='feh'
-fi
-
 alias tmux="TERM=screen-256color-bce tmux"
 # Show history
 alias history='fc -l 1'
 alias x=extract
-if type mpv > /dev/null; then
-    alias mp="mpv"
-else
-    alias mp="mplayer"
-fi
-compdef mp=mplayer
-compdef napi=mplayer # ugly, but makes colorfull completions for napi
 # ls
 alias ls="ls -h --color=tty"
 alias ll='ls -lh --color=tty'
@@ -27,7 +14,6 @@ alias lt='tree -L 2 -d'
 alias um="sudo umount"
 alias po="ping onet.pl"
 alias df="df -h"
-alias pacman="sudo pacman-color"
 alias '?=bc -l <<<'
 alias serve="python2 -m SimpleHTTPServer 8000"
 # always ask for confirmation for these while using ssh:
@@ -38,6 +24,7 @@ alias hist_off='HISTFILE='
 alias hist_on='HISTFILE=$HOME/.zsh_history'
 alias svim="vim -n -c 'set nobackup'"
 alias dssh="dropship ssh"
+alias vssh="cd /opt/starter-kit && vagrant ssh"
 # disable globbing {{{1
 # Disable globbing. stolen from prezto
 alias find='noglob find'
@@ -67,6 +54,7 @@ glastupstream(){
         glast ..origin/$(current_branch) $*
 }
 alias gp='git push'
+alias gu='git pull --rebase'
 alias gf='git fetch'
 alias gd='git diff'
 alias gdi='git diff --word-diff' # show changes in each word in each line

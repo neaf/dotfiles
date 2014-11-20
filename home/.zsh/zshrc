@@ -1,5 +1,6 @@
 # Piel's zshrc v1.0 - refactored
 # colors {{{1
+source ~/.profile
 autoload colors
 colors
 . $ZDOTDIR/zsh.d/nice_colors.zsh
@@ -38,7 +39,7 @@ fi
 # z (the new j, yo!) {{{2
 if [[ -f $MYZMODULES/z/z.sh ]]; then
         _Z_CMD='j'
-        . $MYZMODULES/z/z.sh 
+        . $MYZMODULES/z/z.sh
 fi
 # prompt shit {{{1
 . $ZDOTDIR/zsh.d/prompt.zsh
@@ -48,3 +49,4 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 # modeline {{{1
 # vim: fdm=marker:fdl=0
+
