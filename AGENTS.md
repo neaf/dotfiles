@@ -42,6 +42,5 @@ Decisions: fish only (no zsh module), started by the iTerm2 Fish profile while t
 - `gh auth login` module.
 - Live links for `output.lua`, `display.lua` and `tempora.lua` still point into the old `~/dotfiles`. Running `75` and `76` moves them and the CamillaDSP agent here.
 - `tempora.lua` stays outside until Tempora ships its own helper. A Bitwig module is planned.
-- Rectangle is stopped but still installed on the main Mac. Remove it.
 - iTerm2 reads the repo prefs folder only after `70-iterm2` runs and iTerm2 restarts. Colors can also be chosen from the `neutral-dark` preset.
 - Per-machine stacks (Python, Android, Swift, Java) with a checklist question, version managers per stack (uv, SDKMAN), no universal manager.
