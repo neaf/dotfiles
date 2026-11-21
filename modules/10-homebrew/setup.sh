@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Homebrew itself
+# Package manager for everything below
 source "$DOTFILES_ROOT/lib/common.sh"
 load_brew
 if command -v brew >/dev/null; then

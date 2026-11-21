@@ -25,18 +25,50 @@ ensure_symlink() {
   log "linked $dst"
 }
 
+# brew_install <args>: brew installs share dependencies and Cellar locks, so parallel modules take turns.
+# mkdir is the lock because macOS has no flock.
+brew_install() {
+  local lock="${TMPDIR:-/tmp}/dotfiles-brew.lock"
+  until mkdir "$lock" 2>/dev/null; do sleep 1; done
+  local rc=0
+  brew install "$@" || rc=$?
+  rmdir "$lock"
+  return $rc
+}
+
 # ensure_cask <name> [App Name]: install only when absent.
 # The app name catches apps installed by hand, which brew refuses to overwrite.
 ensure_cask() {
   brew list --cask "$1" >/dev/null 2>&1 && return 0
   [[ -n "${2:-}" && -d "/Applications/$2.app" ]] && return 0
   log "installing cask $1"
-  brew install --cask "$1"
+  brew_install --cask "$1"
 }
 ensure_formula() {
   brew list --formula "${1:t}" >/dev/null 2>&1 && return 0
   log "installing formula $1"
-  brew install "$1"
+  brew_install "$1"
+}
+
+# hs_launch: starts Hammerspoon when it is not running, reloads its config when it is.
+hs_launch() {
+  if pgrep -x Hammerspoon >/dev/null; then
+    osascript -e 'tell application "Hammerspoon" to execute lua code "hs.reload()"' >/dev/null 2>&1 \
+      || { killall Hammerspoon; sleep 1; open -a Hammerspoon; }
+    log "Hammerspoon config reloaded"
+  else
+    open -a Hammerspoon
+    log "Hammerspoon started"
+  fi
+}
+
+# hs_feature <lua file in the module>: links it into ~/.hammerspoon and loads it in the running Hammerspoon.
+# Does nothing when the link is already right.
+hs_feature() {
+  local src="$1" dst="$HOME/.hammerspoon/${1:t}"
+  [[ -L "$dst" && "$(readlink "$dst")" == "$src" ]] && return 0
+  ensure_symlink "$src" "$dst"
+  hs_launch
 }
 
 # Puts brew on PATH for this process when it is installed but not yet in the shell.
