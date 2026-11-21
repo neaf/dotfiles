@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""Prints the 16 ANSI colors and a highlighted code sample to judge a terminal color scheme."""
+E = "\033["
+def c(n, s, bold=False): return f"{E}{'1;' if bold else ''}{n}m{s}{E}0m"
+red, green, yellow, blue, magenta, cyan, grey = 31, 32, 33, 34, 35, 36, 90
+
+print()
+for base in (30, 90):
+    print("  " + "".join(f"{E}{base + i}m\u2588\u2588 {i + (8 if base == 90 else 0):>2}{E}0m " for i in range(8)))
+print("  " + "".join(f"{E}{40 + i}m    {E}0m" for i in range(8)))
+print("  " + "".join(f"{E}{100 + i}m    {E}0m" for i in range(8)))
+print()
+code = [
+    c(grey, "// parse a config and report problems"),
+    f"{c(magenta, 'import')} {c(green, '{ readFile }')} {c(magenta, 'from')} {c(yellow, repr('node:fs/promises'))}",
+    "",
+    f"{c(magenta, 'export async function')} {c(blue, 'loadConfig')}({c(red, 'path')}: {c(cyan, 'string')}): {c(cyan, 'Promise')}<{c(cyan, 'Config')}> {{",
+    f"  {c(magenta, 'const')} {c(red, 'raw')} = {c(magenta, 'await')} {c(blue, 'readFile')}({c(red, 'path')}, {c(yellow, repr('utf8'))})",
+    f"  {c(magenta, 'if')} (!{c(red, 'raw')}.{c(blue, 'length')}) {c(magenta, 'throw new')} {c(cyan, 'Error')}({c(yellow, 'empty file')}) {c(grey, '// exit 1')}",
+    f"  {c(magenta, 'return')} {c(cyan, 'JSON')}.{c(blue, 'parse')}({c(red, 'raw')}) {c(magenta, 'as')} {c(cyan, 'Config')}   {c(grey, '# 42 keys, 3.1 ms')}",
+    "}",
+]
+print("\n".join("  " + l for l in code))
+print()
+print("  " + c(green, "ok", True) + " build passed   " + c(yellow, "warn", True) + " 2 deprecations   " + c(red, "error", True) + " 1 failure   " + c(blue, "info", True) + " 14 files")
+print(f"  {E}4mlink{E}0m  {E}1mbold{E}0m  {E}3mitalic{E}0m  {E}2mdim{E}0m  {E}7mreverse{E}0m")
+print()

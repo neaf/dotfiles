@@ -1,0 +1,14 @@
+{
+  "Profiles": [
+    {
+      "Name": "JetBrains Mono",
+      "Guid": "6C4F1A62-9B3D-4E57-8A21-0D7C5E93B4F8",
+      "Dynamic Profile Parent Name": "Default",
+      "Normal Font": "JetBrainsMono-Regular 15",
+      "ASCII Anti Aliased": true,
+      "Non-ASCII Anti Aliased": true,
+      "ASCII Ligatures": false,
+      "Non-ASCII Ligatures": false
+    }
+  ]
+}
