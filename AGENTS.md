@@ -35,7 +35,7 @@ Decisions: fish only (no zsh module), started by the iTerm2 Fish profile while t
 
 `vm/test.sh` clones a fresh macOS VM with Tart and mounts this repo. In the guest run `zsh "/Volumes/My Shared Files/dotfiles/install.sh"`. Login `admin` / `admin`.
 
-- Install Tart from the `openai/tools` tap: `brew trust --formula openai/tools/softnet`, then `brew install openai/tools/tart`. The old `cirruslabs/cli` tap has no Tart.
+- `vm/test.sh` installs Tart itself, from the `openai/tools` tap (the old `cirruslabs/cli` tap has no Tart). `./install.sh` never needs Tart.
 - From the host, `tart exec dotfiles-test <cmd>` runs a command in the guest. Pass stdin with `tart exec -i`, otherwise piped input is dropped.
 - `vnc://admin:admin@<tart ip dotfiles-test>` opens the guest screen while it runs without a window.
 - The VM has no Touch ID, audio devices or external display. `60-ssh` waits until 1Password is signed in with the SSH agent on (Settings > Developer) and the key is in the Private vault. Skip `60-ssh` and `70-agent-harness` for a run without a key.
