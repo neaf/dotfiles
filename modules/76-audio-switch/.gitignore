@@ -1,0 +1,6 @@
+bin/
+camillagui_backend/
+camillagui.yml
+coeffs/
+statefile.yml
+*.log

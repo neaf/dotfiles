@@ -11,7 +11,7 @@ github_ok() {
 }
 
 until github_ok; do
-  warn "GitHub rejected SSH. In 1Password: sign in, Settings > Developer > Use the SSH agent, add your GitHub key."
+  warn "GitHub rejected SSH. In 1Password: sign in, Settings > Developer > Use the SSH agent, tick 'Display key names when authorizing connections', add your GitHub key."
   [[ -t 0 ]] || die "no terminal to wait on, fix 1Password and rerun"
   read -r "?Press Enter to retry, Ctrl-C to stop. "
 done

@@ -1,0 +1,10 @@
+#!/bin/sh
+# Runs CamillaDSP (BlackHole 2ch -> one output device from configs/) with the
+# websocket server on port 1235. The Hammerspoon menubar picks the config.
+# -w keeps the process alive when the output device is missing, so the
+# menubar can switch configs or reload once the device returns.
+# The statefile remembers the last config; ka6.yml is the first-run default.
+DIR="$(cd "$(dirname "$0")" && pwd)"
+CONFIG=""
+[ -f "$DIR/statefile.yml" ] || CONFIG="$DIR/configs/ka6.yml"
+exec "$DIR/bin/camilladsp" -w -p 1235 -s "$DIR/statefile.yml" -o "$DIR/camilladsp.log" $CONFIG

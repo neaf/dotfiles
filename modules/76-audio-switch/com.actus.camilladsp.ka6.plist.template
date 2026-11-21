@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.actus.camilladsp.ka6</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>__DIR__/CamillaDSP</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+    <key>StandardOutPath</key>
+    <string>__DIR__/launchd_ka6.log</string>
+    <key>StandardErrorPath</key>
+    <string>__DIR__/launchd_ka6.log</string>
+</dict>
+</plist>

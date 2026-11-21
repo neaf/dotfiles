@@ -1,0 +1,39 @@
+title: "BlackHole 2ch -> Komplete Audio 6 (outputs 1-2)"
+
+devices:
+  samplerate: 48000
+  chunksize: 1024
+  enable_rate_adjust: true
+  adjust_period: 3
+  target_level: 1024
+  capture:
+    type: CoreAudio
+    channels: 2
+    device: "BlackHole 2ch"
+    format: F32
+  playback:
+    type: CoreAudio
+    channels: 6
+    device: "Komplete Audio 6"
+    format: S24
+  resampler:
+    type: Synchronous
+
+mixers:
+  stereo_to_6ch:
+    channels:
+      in: 2
+      out: 6
+    mapping:
+      - dest: 0
+        sources:
+          - channel: 0
+            gain: 0
+      - dest: 1
+        sources:
+          - channel: 1
+            gain: 0
+
+pipeline:
+  - type: Mixer
+    name: stereo_to_6ch

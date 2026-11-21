@@ -44,3 +44,8 @@ load_brew() {
   command -v brew >/dev/null && return 0
   [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 }
+
+# run_module <folder name>: runs another module first. Modules are idempotent, so a repeat is cheap.
+run_module() {
+  zsh "$DOTFILES_ROOT/modules/$1/setup.sh"
+}
