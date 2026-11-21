@@ -9,6 +9,7 @@ Idempotent setup for a personal Mac. Run `./install.sh`, tick modules in the che
 - Every step checks state first and changes nothing when it is already right. Use the helpers in `lib/common.sh` (`ensure_symlink`, `ensure_cask <name> [App Name]`, `ensure_formula`, `load_brew`, `run_module`).
 - A feature that needs another module calls `run_module <folder>` at the top. There is no dependency resolver.
 - `ensure_symlink` moves an existing file to `<target>.bak` once. Repo files are linked, so edits go to the repo.
+- Docs and comments say what the repo does. They do not record what it replaced or why something was dropped.
 - Never commit secrets, the Jellyfin user database, or app state. Machine-only artifacts go in a module `.gitignore`.
 - Scripts are zsh. Traps: `modules` is a read-only variable, macOS has no `timeout`, `echo ====` fails because zsh expands `=`, and `plistlib.load` needs a seekable stream (use `loads(read())`).
 
@@ -25,7 +26,7 @@ Idempotent setup for a personal Mac. Run `./install.sh`, tick modules in the che
 | 74-hammerspoon, 75-display-switch, 76-audio-switch, 77-window-management | Hammerspoon host and its features (hyper = ctrl+alt+cmd+shift) |
 | 80-python, 85-transmission, 86-spotify, 90-jellyfin | uv and Python, apps, Jellyfin with seeded config |
 
-Decisions: fish only (no zsh module), started by the iTerm2 Fish profile while the login shell stays zsh. Hammerspoon replaces Rectangle. 1Password holds the SSH key, GitHub trusts its public half, a new Mac never runs `ssh-keygen`.
+Decisions: fish only (no zsh module), started by the iTerm2 Fish profile while the login shell stays zsh. 1Password holds the SSH key, GitHub trusts its public half, a new Mac never runs `ssh-keygen`.
 
 ## Testing in a VM
 
